@@ -29,7 +29,9 @@ async function run() {
         await client.connect();
 
         const roomCollection = client.db('stayZen').collection('rooms');
+        const bookingCollection = client.db('stayZen').collection('bookings')
 
+        /* rooms */
         // get all rooms
         app.get('/rooms', async (req, res) => {
             const cursor = roomCollection.find();
@@ -56,6 +58,15 @@ async function run() {
             const result = await roomCollection.findOne(query, options);
             res.send(result);
         })
+
+        /* bookings */
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const result = await bookingCollection.insertOne(booking);
+            res.send(result);
+        })
+
 
 
 
