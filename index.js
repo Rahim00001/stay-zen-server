@@ -104,10 +104,16 @@ async function run() {
             const updatedBooking = req.body;
             const booking = {
                 $set: {
-
+                    room_name: updatedBooking.room_name,
+                    price: updatedBooking.price,
+                    img: updatedBooking.img,
+                    cheakIn: updatedBooking.cheakIn,
+                    cheakOut: updatedBooking.cheakOut,
+                    number: updatedBooking.number
                 }
             }
-            const result = await bookingCollection.updateOne(filter, booking, options)
+            const result = await bookingCollection.updateOne(filter, booking, options);
+            res.send(result);
         })
 
 
