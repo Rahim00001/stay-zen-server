@@ -60,6 +60,19 @@ async function run() {
         })
 
         /* bookings */
+        // get bookings based on user
+        app.get('/bookings', async (req, res) => {
+            console.log(req.query.email);
+            let query = {}
+            if (req.query?.email) {
+                query = { email: req.query.email }
+            }
+            const cursor = bookingCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+        // add bookings
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
             console.log(booking);
